@@ -19,6 +19,7 @@ if (isset($_SESSION["user_role"])) {
     <title>McBank - Dashboard</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="../css/dashboard.css">
 </head>
@@ -46,6 +47,32 @@ if (isset($_SESSION["user_role"])) {
                         <h3>Admin Status</h3>
                         <h2>Active</h2>
                     </div>
+                </div>
+            </div>
+
+            <div class="charts-container">
+                <div class="chart-wrapper">
+                    <div class="chart-header">
+                        <h3><i class="fa-solid fa-chart-line" style="color: #DA291C; margin-right: 10px;"></i> User Registration Growth</h3>
+                        <span class="chart-updated" id="userChartUpdated">Last updated: just now</span>
+                    </div>
+                    <div class="chart-loading" id="userChartLoading">
+                        <div class="spinner"></div>
+                        <p>Loading chart...</p>
+                    </div>
+                    <canvas id="userGrowthChart" style="display: none;"></canvas>
+                </div>
+
+                <div class="chart-wrapper">
+                    <div class="chart-header">
+                        <h3><i class="fa-solid fa-pie-chart" style="color: #DA291C; margin-right: 10px;"></i> User Role Distribution</h3>
+                        <span class="chart-updated" id="roleChartUpdated">Last updated: just now</span>
+                    </div>
+                    <div class="chart-loading" id="roleChartLoading">
+                        <div class="spinner"></div>
+                        <p>Loading chart...</p>
+                    </div>
+                    <canvas id="userRoleChart" style="display: none;"></canvas>
                 </div>
             </div>
 
@@ -95,6 +122,32 @@ if (isset($_SESSION["user_role"])) {
                     <span>Receive</span>
                 </div>
             </div>
+
+            <div class="charts-container">
+                <div class="chart-wrapper">
+                    <div class="chart-header">
+                        <h3><i class="fa-solid fa-chart-line" style="color: #DA291C; margin-right: 10px;"></i> Monthly Spending Trend</h3>
+                        <span class="chart-updated" id="spendingChartUpdated">Last updated: just now</span>
+                    </div>
+                    <div class="chart-loading" id="spendingChartLoading">
+                        <div class="spinner"></div>
+                        <p>Loading chart...</p>
+                    </div>
+                    <canvas id="spendingTrendChart" style="display: none;"></canvas>
+                </div>
+
+                <div class="chart-wrapper">
+                    <div class="chart-header">
+                        <h3><i class="fa-solid fa-pie-chart" style="color: #DA291C; margin-right: 10px;"></i> Spending by Category</h3>
+                        <span class="chart-updated" id="categoryChartUpdated">Last updated: just now</span>
+                    </div>
+                    <div class="chart-loading" id="categoryChartLoading">
+                        <div class="spinner"></div>
+                        <p>Loading chart...</p>
+                    </div>
+                    <canvas id="spendingCategoryChart" style="display: none;"></canvas>
+                </div>
+            </div>
             
             <div class="card-panel">
                 <h3 class="activity-header"><i class="fa-solid fa-clock-rotate-left" style="color: #DA291C; margin-right: 10px;"></i> Recent Activity</h3>
@@ -130,5 +183,6 @@ if (isset($_SESSION["user_role"])) {
     </div>
     
     <script src="../scripts/Service.js"></script>
+    <script src="../scripts/ChartManager.js"></script>
 </body>
 </html>
